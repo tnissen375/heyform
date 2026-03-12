@@ -19,6 +19,13 @@ services:
       REDIS_HOST: ${REDIS_HOST:-keydb}
       REDIS_PORT: ${REDIS_PORT:-6379}
       APP_DISABLE_REGISTRATION: ${APP_DISABLE_REGISTRATION:-false}
+      SMTP_FROM: ${SMTP_FROM:-heyform@test.local}
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_IGNORE_CERT: ${SMTP_IGNORE_CERT:-false}
     volumes:
       - heyform_uploads:/app/static/upload
     healthcheck:
@@ -52,6 +59,12 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
+
+  mailpit:
+    image: ${MAILPIT_IMAGE:-axllent/mailpit:latest}
+    restart: unless-stopped
+    ports:
+      - "${MAILPIT_UI_HOST_PORT:-8025}:8025"
 
 volumes:
   heyform_uploads:
