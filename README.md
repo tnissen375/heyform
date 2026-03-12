@@ -28,7 +28,9 @@ This repo is set up for Portainer's `Deploy from Git repository` flow.
 
 ## Notes
 
+- This stack was validated locally on March 12, 2026 with `heyform/community-edition:latest`, `percona/percona-server-mongodb:4.4`, and `eqalpha/keydb:latest`.
 - Uploaded files, MongoDB data, and KeyDB data are stored in Docker named volumes.
 - The stack publishes HeyForm on port `9513` by default. Change `HEYFORM_HOST_PORT` if needed.
 - HeyForm itself serves plain HTTP on port `8000` inside the container. For HTTPS, place it behind a reverse proxy.
 - This stack follows HeyForm's simple upstream pattern and keeps MongoDB private on the internal Docker network without database auth enabled.
+- The previous `eqalpha/keydb:6.3.3` tag no longer resolves on Docker Hub; use `eqalpha/keydb:latest` unless you have a known-good pinned tag.
